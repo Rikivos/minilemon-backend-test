@@ -1,0 +1,27 @@
+{
+  "name": "minilemon-backend-test",
+  "version": "1.0.0",
+  "description": "This is repository for test backend developer in Minilemon",
+  "type": "module",
+  "main": "api/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon api/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rikivos/minilemon-backend-test.git"
+  },
+  "author": "Ramadhani Rizky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rikivos/minilemon-backend-test/issues"
+  },
+  "homepage": "https://github.com/Rikivos/minilemon-backend-test#readme",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.17.1",
+    "nodemon": "^3.1.10"
+  }
+}
