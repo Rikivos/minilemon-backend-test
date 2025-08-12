@@ -18,6 +18,9 @@ export class UserValidator {
         if (phone.length < 10) {
             throw new Error("Phone number must be at least 10 digits");
         }
+        if (!/^\d+$/.test(phone)) {
+            throw new Error("Phone number must contain only digits");
+        }
         const existing = await this.userRepository.getUserByPhone(phone);
         if (existing && existing.id !== excludeUserId) {
             throw new Error("Phone number already exists");

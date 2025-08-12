@@ -8,9 +8,9 @@ import { DeleteUser } from "../../usecases/users/deleteUser.js";
 
 const userRepository = new MongodbUserRepository();
 const userValidator = new UserValidator(userRepository);
-const createUser = new CreateUser(userRepository, userValidator);
 const getAll = new GetAllUser(userRepository);
 const getUserById = new GetUserById(userRepository);
+const createUser = new CreateUser(userRepository, userValidator);
 const updateUser = new UpdateUser(userRepository, userValidator);
 const deleteUser = new DeleteUser(userRepository);
 
