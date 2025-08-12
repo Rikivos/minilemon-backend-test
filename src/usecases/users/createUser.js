@@ -1,32 +1,16 @@
 import bcrypt from "bcryptjs";
-
 export class CreateUser {
-    constructor(userRepository) {
+    constructor(userRepository, userValidator) {
         this.userRepository = userRepository;
+        this.userValidator = userValidator;
     }
 
     async execute({ name, email, phone, password, departement, active = true }) {
-        // Cek email sudah ada
-        const existingEmail = await this.userRepository.getUserByEmail(email);
-        if (existingEmail) {
-            throw new Error("Email already exists");
-        }
+        await this.userValidator.validateEmail(email);
+        await this.userValidator.validatePhone(phone);
 
-        // Cek nomor sudah ada
-        const existingPhone = await this.userRepository.getUserByPhone(phone);
-        if (existingPhone) {
-            throw new Error("Phone number already exists");
-        }
-
-        // Validasi no telp
-        if (phone.length < 10) {
-            throw new Error("Phone number must be 10 digits");
-        }
-
-        // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Simpan user
         return await this.userRepository.create({
             name,
             email,

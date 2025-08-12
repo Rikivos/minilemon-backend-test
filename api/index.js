@@ -9,8 +9,8 @@ const app = express()
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  res.status(200).json({ message: 'API Backend Express is Running ' });
+});
 
 
 app.use('/api', userRoute);
