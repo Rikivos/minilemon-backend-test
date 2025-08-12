@@ -19,11 +19,9 @@ backend-v2/
    ├── index.js
 ├── src/
 │   ├── domain/        
-│   ├── controllers/    
-│   ├── usecases/       
-│   ├── repositories/   
-│   ├── middlewares/    
-│   ├── routes/                    
+│   ├── infrastructure/    
+│   ├── repositories/       
+│   ├── usecases/                        
 ├── .env                
 ├── .env.example
 
