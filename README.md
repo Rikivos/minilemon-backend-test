@@ -19,11 +19,9 @@ backend-v2/
    ├── index.js
 ├── src/
 │   ├── domain/        
-│   ├── controllers/    
-│   ├── usecases/       
-│   ├── repositories/   
-│   ├── middlewares/    
-│   ├── routes/                    
+│   ├── infrastructure/    
+│   ├── repositories/       
+│   ├── usecases/                        
 ├── .env                
 ├── .env.example
 
@@ -100,11 +98,14 @@ Ikuti langkah-langkah berikut untuk menjalankan backend jika menggunakan docker:
 Endpoint tersedia di:
 
 ```
-https://berita-desa-api2.vercel.app/
+https://minilemon-backend-test.vercel.app
 ```
 
 Contoh:
-- `/api/users` — Data pengguna
+- GET `/api/users` — Data pengguna
+- POST `/api/users` — Data pengguna
+- PUT `/api/users` — Data pengguna
+- DELETE `/api/users` — Data pengguna
 ---
 
 ## 🗃️ Struktur Tabel Database (MongoDB)
@@ -115,7 +116,10 @@ Contoh:
 | _id        | ObjectId  |
 | name       | String    |
 | email      | String    |
+| phone      | String    |
 | password   | String    |
+| active     | Boolean   |
+| departement| String    |
 | createdAt  | Date      |
 | updatedAt  | Date      |
 
