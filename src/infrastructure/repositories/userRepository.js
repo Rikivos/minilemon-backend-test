@@ -1,35 +1,38 @@
 import { UserRepository } from "../../domain/users/userRepository.js";
-import { model, Schema, mongoose } from "mongoose";
-import bcrypt from "bcryptjs";
+import { Schema, mongoose } from "mongoose";
+
 
 const UserSchema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
     },
     email: {
         type: String,
         required: true,
         unique: true,
+        lowercase: true,
+        trim: true,
+        match: [/^\S+@\S+\.\S+$/, 'Invalid email format'],
     },
-    phone : {
+    phone: {
         type: String,
         required: true,
+        unique: true,
     },
     password: {
         type: String,
         required: true,
     },
 
-    active : {
+    active: {
         type: Boolean,
         default: true,
     },
-    departement : {
+    departement: {
         type: String,
-    }, 
-    
+    },
+
 }, { timestamps: true }
 );
 
@@ -37,9 +40,7 @@ const UserModel = mongoose.model("User", UserSchema);
 
 export class MongodbUserRepository extends UserRepository {
     async create(user) {
-        const hashed = await bcrypt.hash(user.password, 10);
-        const created = await UserModel.create({ ...user, password: hashed });
-        return created;
+        return await UserModel.create(user);
     }
 
     async getAll() {
@@ -50,6 +51,7 @@ export class MongodbUserRepository extends UserRepository {
         return await UserModel.findById(id);
     }
 
+
     async getUserByEmail(email) {
         return await UserModel.findOne({ email });
     }
@@ -59,10 +61,14 @@ export class MongodbUserRepository extends UserRepository {
     }
 
     async update(id, user) {
-        return await UserModel.updateOne({ _id: id }, { $set: user });
+        return await UserModel.findByIdAndUpdate(
+            new mongoose.Types.ObjectId(id),
+            { $set: user },
+            { new: true }
+        );
     }
 
     async delete(id) {
-        return await UserModel.deleteOne({ _id: id });
+        return await UserModel.findByIdAndDelete(new mongoose.Types.ObjectId(id));
     }
 }
