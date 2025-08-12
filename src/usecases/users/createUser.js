@@ -1,9 +1,13 @@
-import bcrypt from 'bcrypt';
+import bcrypt from "bcryptjs";
 
 export const CreateUser = (userRepository) => async ({ name, email, phone, password, departement, active = true }) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        throw new Error('Invalid email format');
+        throw new Error('Email harus dalam format valid');
+    }
+
+    if (phone.length < 10) {
+        throw new Error('Nomor telepon hanya boleh mengandung angka dan minimal 10 karakter');
     }
 
     const [existedEmailUser, existedPhoneUser] = await Promise.all([

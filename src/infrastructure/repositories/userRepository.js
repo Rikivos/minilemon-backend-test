@@ -1,5 +1,5 @@
 import { UserRepository } from "../../domain/users/userRepository.js";
-import { Model, Schema, mongoose } from "mongoose";
+import { model, Schema, mongoose } from "mongoose";
 import bcrypt from "bcryptjs";
 
 const UserSchema = new Schema({
@@ -33,7 +33,7 @@ const UserSchema = new Schema({
 }, { timestamps: true }
 );
 
-const UserModel = Model("User", UserSchema);
+const UserModel = mongoose.model("User", UserSchema);
 
 export class MongodbUserRepository extends UserRepository {
     async create(user) {
@@ -46,11 +46,23 @@ export class MongodbUserRepository extends UserRepository {
         return await UserModel.find();
     }
 
+    async getById(id) {
+        return await UserModel.findById(id);
+    }
+
     async getUserByEmail(email) {
         return await UserModel.findOne({ email });
     }
 
     async getUserByPhone(phone) {
         return await UserModel.findOne({ phone });
+    }
+
+    async update(id, user) {
+        return await UserModel.updateOne({ _id: id }, { $set: user });
+    }
+
+    async delete(id) {
+        return await UserModel.deleteOne({ _id: id });
     }
 }
