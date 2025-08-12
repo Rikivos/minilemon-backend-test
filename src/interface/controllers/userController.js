@@ -1,4 +1,5 @@
 import { MongodbUserRepository } from "../../infrastructure/repositories/userRepository.js";
+import { UserValidator } from "../../domain/users/userValidator.js";
 import { CreateUser } from "../../usecases/users/createUser.js";
 import { GetAllUser } from "../../usecases/users/getAllUser.js";
 import { GetUserById } from "../../usecases/users/getUserById.js";
@@ -6,10 +7,11 @@ import { UpdateUser } from "../../usecases/users/updateUser.js";
 import { DeleteUser } from "../../usecases/users/deleteUser.js";
 
 const userRepository = new MongodbUserRepository();
-const createUser = new CreateUser(userRepository);
+const userValidator = new UserValidator(userRepository);
+const createUser = new CreateUser(userRepository, userValidator);
 const getAll = new GetAllUser(userRepository);
 const getUserById = new GetUserById(userRepository);
-const updateUser = new UpdateUser(userRepository);
+const updateUser = new UpdateUser(userRepository, userValidator);
 const deleteUser = new DeleteUser(userRepository);
 
 export const createUserController = async (req, res) => {

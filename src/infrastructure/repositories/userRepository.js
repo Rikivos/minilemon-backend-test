@@ -1,44 +1,8 @@
-import { UserRepository } from "../../domain/users/userRepository.js";
-import { Schema, mongoose } from "mongoose";
 
+import { UserModel } from "../models/userModel.js";
+import { mongoose } from "mongoose";
 
-const UserSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-        trim: true,
-        match: [/^\S+@\S+\.\S+$/, 'Invalid email format'],
-    },
-    phone: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-
-    active: {
-        type: Boolean,
-        default: true,
-    },
-    departement: {
-        type: String,
-    },
-
-}, { timestamps: true }
-);
-
-const UserModel = mongoose.model("User", UserSchema);
-
-export class MongodbUserRepository extends UserRepository {
+export class MongodbUserRepository  {
     async create(user) {
         return await UserModel.create(user);
     }
