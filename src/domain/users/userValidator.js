@@ -19,7 +19,8 @@ export class UserValidator {
         if (phone.length < 10) {
             throw new ValidationError("Phone number must be at least 10 digits");
         }
-        if (!/^\d+$/.test(phone)) {
+        const phoneNumberRegex = /^\d+$/;
+        if (!phoneNumberRegex.test(phone)) {
             throw new ValidationError("Phone number must contain only digits");
         }
         const existing = await this.userRepository.getUserByPhone(phone);
