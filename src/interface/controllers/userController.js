@@ -14,10 +14,19 @@ const createUser = new CreateUser(userRepository, userValidator);
 const updateUser = new UpdateUser(userRepository, userValidator);
 const deleteUser = new DeleteUser(userRepository);
 
-export const getAllUserController = async (res, next) => {
+export const createUserController = async (req, res, next) => {
     try {
-        const getAllUsers = await getAll.execute(); 
-        res.status(200).json({ success: true, data: getAllUsers });
+        const user = await createUser.execute(req.body); 
+        res.status(201).json({ success: true, data: user });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getAllUserController = async (req, res, next) => {
+    try {
+        const users = await getAll.execute(); 
+        res.status(200).json({ success: true, data: users });
     } catch (error) {
         next(error);
     }
@@ -25,17 +34,8 @@ export const getAllUserController = async (res, next) => {
 
 export const getUserByIdController = async (req, res, next) => {
     try {
-        const getUserById = await getUserById.execute(req.params); 
-        res.status(200).json({ success: true, data: getUserById });
-    } catch (error) {
-        next(error);
-    }
-};
-
-export const createUserController = async (req, res, next) => {
-    try {
-        const createUser = await createUser.execute(req.body); 
-        res.status(201).json({ success: true, data: createUser });
+        const user = await getUserById.execute(req.params); 
+        res.status(200).json({ success: true, data: user });
     } catch (error) {
         next(error);
     }
@@ -56,8 +56,8 @@ export const updateUserController = async (req, res, next) => {
 export const deleteUserController = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const deleteUsers = await deleteUser.execute({ id }); 
-        res.status(200).json({ success: true, data: deleteUsers });
+        const users = await deleteUser.execute({ id }); 
+        res.status(200).json({ success: true, data: users });
     } catch (error) {
         next(error);
     }
