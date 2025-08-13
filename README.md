@@ -14,7 +14,7 @@ This is repository for test backend developer in Minilemon
 Proyek backend ini mengikuti pendekatan **Clean Architecture** dengan struktur direktori sebagai berikut:
 
 ```
-backend-v2/
+minilemon-backend-test/
 ├── api
    ├── index.js
 ├── src/
