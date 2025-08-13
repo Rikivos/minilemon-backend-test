@@ -5,12 +5,12 @@ export class GetUserById {
         this.userRepository = userRepository;
     }
 
-    async execute(params) {
-        const user = await this.userRepository.getById(params.id);
+    async execute(id) {
+        const user = await this.userRepository.getById(id);
         if (!user) {
             throw new NotFoundError ("User not found");
         }
-        return await this.userRepository.getById(params.id);
+        return await this.userRepository.getById(id);
     }
 
 }

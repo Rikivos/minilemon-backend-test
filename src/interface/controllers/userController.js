@@ -34,7 +34,8 @@ export const getAllUserController = async (req, res, next) => {
 
 export const getUserByIdController = async (req, res, next) => {
     try {
-        const user = await getUserById.execute(req.params); 
+        const { id } = req.params;
+        const user = await getUserById.execute(id); 
         res.status(200).json({ success: true, data: user });
     } catch (error) {
         next(error);

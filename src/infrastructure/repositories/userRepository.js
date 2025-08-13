@@ -8,11 +8,11 @@ export class MongodbUserRepository  {
     }
 
     async getAll() {
-        return await UserModel.find();
+        return await UserModel.find().lean();
     }
 
     async getById(id) {
-        return await UserModel.findById(id);
+        return await UserModel.findById(new mongoose.Types.ObjectId(id));
     }
 
 
@@ -26,7 +26,7 @@ export class MongodbUserRepository  {
 
     async update(id, user) {
         return await UserModel.findByIdAndUpdate(
-            new mongoose.Types.ObjectId(id),
+            new mongoose.Types.ObjectId(id).lean(),
             { $set: user },
             { new: true }
         );
