@@ -14,57 +14,52 @@ const createUser = new CreateUser(userRepository, userValidator);
 const updateUser = new UpdateUser(userRepository, userValidator);
 const deleteUser = new DeleteUser(userRepository);
 
-export const createUserController = async (req, res) => {
+export const getAllUserController = async (res, next) => {
     try {
-        const user = await createUser.execute(req.body); 
-        res.status(201).json({ success: true, data: user });
+        const getAllUsers = await getAll.execute(); 
+        res.status(200).json({ success: true, data: getAllUsers });
     } catch (error) {
-        res.status(400).json({ success: false, message: error.message });
+        next(error);
     }
 };
 
-export const getAllUserController = async (req, res) => {
+export const getUserByIdController = async (req, res, next) => {
     try {
-        const users = await getAll.execute(); 
-        res.status(200).json({ success: true, data: users });
+        const getUserById = await getUserById.execute(req.params); 
+        res.status(200).json({ success: true, data: getUserById });
     } catch (error) {
-        res.status(400).json({ success: false, message: error.message });
+        next(error);
     }
 };
 
-export const getUserByIdController = async (req, res) => {
+export const createUserController = async (req, res, next) => {
     try {
-        const user = await getUserById.execute(req.params); 
-        res.status(200).json({ success: true, data: user });
+        const createUser = await createUser.execute(req.body); 
+        res.status(201).json({ success: true, data: createUser });
     } catch (error) {
-        res.status(400).json({ success: false, message: error.message });
+        next(error);
     }
 };
 
-export const updateUserController = async (req, res) => {
+export const updateUserController = async (req, res, next) => {
     try {
         const { id } = req.params;
         const updatedUser = await updateUser.execute({ id, ...req.body });
-        
-        if (!updatedUser) {
-            return res.status(404).json({ success: false, message: "User not found" });
-        }
-
         res.status(200).json({ success: true, data: updatedUser });
     } catch (error) {
-        res.status(400).json({ success: false, message: error.message });
+        next(error);
     }
 };
 
 
 
-export const deleteUserController = async (req, res) => {
+export const deleteUserController = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const users = await deleteUser.execute({ id }); 
-        res.status(200).json({ success: true, data: users });
+        const deleteUsers = await deleteUser.execute({ id }); 
+        res.status(200).json({ success: true, data: deleteUsers });
     } catch (error) {
-        res.status(400).json({ success: false, message: error.message });
+        next(error);
     }
 };
 

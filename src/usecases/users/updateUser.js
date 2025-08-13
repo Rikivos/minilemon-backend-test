@@ -1,3 +1,5 @@
+import { NotFoundError } from "../../domain/errors/notFoundError.js";
+import bcrypt from "bcryptjs";
 export class UpdateUser {
     constructor(userRepository, userValidator) {
         this.userRepository = userRepository;
@@ -6,7 +8,7 @@ export class UpdateUser {
 
     async execute({ id, name, email, phone, password, departement, active }) {
         const existingUser = await this.userRepository.getById(id);
-        if (!existingUser) throw new Error("User not found");
+        if (!existingUser) throw new NotFoundError("User not found");
 
         if (email && email !== existingUser.email) {
             await this.userValidator.validateEmail(email, id);
