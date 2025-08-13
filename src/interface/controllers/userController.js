@@ -14,52 +14,52 @@ const createUser = new CreateUser(userRepository, userValidator);
 const updateUser = new UpdateUser(userRepository, userValidator);
 const deleteUser = new DeleteUser(userRepository);
 
-export const createUserController = async (req, res, next) => {
+export const createUserController = async (req, res) => {
     try {
         const user = await createUser.execute(req.body); 
         res.status(201).json({ success: true, data: user });
     } catch (error) {
-        next(error);
+        res.status(400).json({ success: false, message: error.message });
     }
 };
 
-export const getAllUserController = async (req, res, next) => {
+export const getAllUserController = async (req, res) => {
     try {
         const users = await getAll.execute(); 
         res.status(200).json({ success: true, data: users });
     } catch (error) {
-        next(error);
+        res.status(400).json({ success: false, message: error.message });
     }
 };
 
-export const getUserByIdController = async (req, res, next) => {
+export const getUserByIdController = async (req, res) => {
     try {
         const user = await getUserById.execute(req.params); 
         res.status(200).json({ success: true, data: user });
     } catch (error) {
-        next(error);
+        res.status(400).json({ success: false, message: error.message });
     }
 };
 
-export const updateUserController = async (req, res, next) => {
+export const updateUserController = async (req, res) => {
     try {
         const { id } = req.params;
         const updatedUser = await updateUser.execute({ id, ...req.body });
         res.status(200).json({ success: true, data: updatedUser });
     } catch (error) {
-        next(error);
+        res.status(400).json({ success: false, message: error.message });
     }
 };
 
 
 
-export const deleteUserController = async (req, res, next) => {
+export const deleteUserController = async (req, res) => {
     try {
         const { id } = req.params;
         const users = await deleteUser.execute({ id }); 
         res.status(200).json({ success: true, data: users });
     } catch (error) {
-        next(error);
+        res.status(400).json({ success: false, message: error.message });
     }
 };
 
