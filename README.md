@@ -83,10 +83,15 @@ Ikuti langkah-langkah berikut untuk menjalankan backend jika menggunakan docker:
 
 3. **Jalankan server via docker**
    ```bash
+   npm install
+   ```
+
+4. **Jalankan server via docker**
+   ```bash
    docker compose up
    ```
 
-4. **Akses aplikasi**
+5. **Akses aplikasi**
    ```bash
    http://localhost:3000
    ```
@@ -102,10 +107,10 @@ https://minilemon-backend-test.vercel.app
 ```
 
 Contoh:
-- GET `/api/users` — Data pengguna
-- POST `/api/users` — Data pengguna
-- PUT `/api/users` — Data pengguna
-- DELETE `/api/users` — Data pengguna
+- GET `/api/users` — Mengambil Semua Data pengguna
+- POST `/api/users` — Menambah Data pengguna
+- PUT `/api/users/:id` — Memperbarui Data pengguna
+- DELETE `/api/users/:id` — Menghapus Data pengguna
 ---
 
 ## 🗃️ Struktur Tabel Database (MongoDB)
@@ -130,6 +135,16 @@ Contoh:
 Backend sudah dideploy secara publik di:
 
 🔗 [https://minilemon-backend-test.vercel.app/](https://minilemon-backend-test.vercel.app/)
+
+---
+
+---
+
+## 🚀 Postman Collection
+
+Postman Collection juga dibuat dan dapat diakses di:
+
+🔗 [https://berita-8122.postman.co/workspace/minilemon-backend-test~c781a70f-8a48-40da-9aa1-82cc4671d760/collection/36315161-86b4cb06-b8a9-4539-82c3-810bac94d6a1?action=share&creator=36315161](https://berita-8122.postman.co/workspace/minilemon-backend-test~c781a70f-8a48-40da-9aa1-82cc4671d760/collection/36315161-86b4cb06-b8a9-4539-82c3-810bac94d6a1?action=share&creator=36315161)
 
 ---
 

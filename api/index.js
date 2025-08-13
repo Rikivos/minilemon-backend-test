@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { connectMongoDB } from '../src/infrastructure/mongodb/mongodbClient.js';
+import { errorHandler } from '../src/interface/middlewares/errorHandler.js';
 import userRoute from '../src/interface/routes/userRoute.js';
 import { swaggerUi, swaggerSpec } from "../src/infrastructure/swagger/swaggerConfig.js";
 
@@ -22,6 +23,8 @@ app.get('/', (req, res) => {
 app.use('/api', userRoute);
 
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 connectMongoDB().then(() => {
