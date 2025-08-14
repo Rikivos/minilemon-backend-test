@@ -2,16 +2,12 @@ FROM node:20
 
 WORKDIR /app
 
-COPY package.json .
+COPY package*.json ./
 
-
-RUN npm install
-
+RUN npm install 
 
 COPY . .
 
-
 ENV PORT=3000
 
-# Jalankan server
-CMD ["nodemon", "api/index.js"]
+CMD ["node", "api/index.js"]
