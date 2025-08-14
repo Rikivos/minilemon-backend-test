@@ -80,18 +80,13 @@ Ikuti langkah-langkah berikut untuk menjalankan backend jika menggunakan docker:
    ```bash
    cd minilemon-backend-test
    ```
-
-3. **Jalankan server via docker**
+   
+3. **Build dan jalankan server via docker**
    ```bash
-   npm install
+   docker compose up --build
    ```
 
-4. **Jalankan server via docker**
-   ```bash
-   docker compose up
-   ```
-
-5. **Akses aplikasi**
+4. **Akses aplikasi**
    ```bash
    http://localhost:3000
    ```
